@@ -52,7 +52,6 @@
     "bin/radio-sandbox",
     "bin/radio-mpris",
     "bin/radio-proxy",
-    "bin/radio-status.lua",
     "bin/radio-favicon"
   ],
   "capabilities": {
