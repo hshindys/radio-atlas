@@ -20,12 +20,20 @@ QtObject {
     // Theme.font is the shell's UI face; the original used the shell body and
     // heading faces for its labels, so the family carries over directly.
     readonly property string fontFamily: "Space Grotesk"
-    readonly property font font: Qt.font({ family: fontFamily, pointSize: fontBaseSize })
 
     // Base size the original scaled its spacing against. Ryoku's shell text
     // sits at 13px on the bar and 14-15px in panels; 13 keeps the globe's dense
     // labels legible inside the panel's width budget.
     readonly property int fontBaseSize: 13
+    readonly property int fontBaseSizeSmall: fontBaseSize - 1
+
+    // Omarchy's Style.font was an object of named pixel sizes (font.caption,
+    // font.heading, ...), not a QFont - the panel reads the members directly.
+    readonly property QtObject font: QtObject {
+        readonly property int caption: fontBaseSize - 2
+        readonly property int heading: fontBaseSize + 2
+        readonly property int body: fontBaseSize
+    }
     readonly property real spacingScaleWithFont: 1.0
 
     // Omarchy's Style.font exposed a small named set (caption/heading/body/...).

@@ -6,6 +6,7 @@ import Quickshell.Hyprland
 import Quickshell.Io
 import Ryoku.PluginKit.Singletons
 import "../lib" as Atlas
+import "../lib"
 import "../lib/RadioModel.js" as RadioModel
 
 Item {
@@ -20,8 +21,13 @@ Item {
   property bool active: false
   property real widthBudget: 520
 
+  // The slot that hosts this panel sizes its card from the root's implicit
+  // geometry; the Omarchy body (`panel`) kept its own, so the root must
+  // surface them (the original host read `panel.implicitWidth` instead).
+  implicitWidth: root.preferredWidth
+  implicitHeight: root.preferredHeight
+
   // Forward the host's density scale to the token shim's space() helper.
-  Component.onCompleted: { if (typeof Atlas.Style.rootDensity !== "undefined") Atlas.Style.rootDensity = s }
 
   property bool opened: false
   property var countries: []
@@ -1467,8 +1473,8 @@ Item {
   }
 
   property bool started: false
-  onPluginApiChanged: retryStart()
-  onBinDirChanged: retryStart()
+  onPluginApiChanged: { retryStart() }
+  onBinDirChanged: { retryStart() }
 
   function retryStart() {
     if (root.started || root.binDir === "") return;
@@ -1478,7 +1484,10 @@ Item {
     statusInitProcess.running = true;
   }
 
-  Component.onCompleted: retryStart()
+  Component.onCompleted: {
+    if (typeof Atlas.Style.rootDensity !== "undefined") Atlas.Style.rootDensity = s
+    retryStart()
+  }
 
   Connections {
     target: Hyprland
