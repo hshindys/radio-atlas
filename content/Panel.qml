@@ -24,7 +24,8 @@ Item {
     // Only load the Hyprland bridge when running under Hyprland.
     try { hyprlandLoader.active = (Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE") !== ""); }
     catch (e) { hyprlandLoader.active = false; }
-    Quickshell.execDetached(["mkdir", "-p", root.stateDir]);
+    // The state dir itself is created by the helpers (bin/radio-state runs
+    // install -d), so the QML never spawns a process to make it.
   }
 
   // Ryoku host properties. Omarchy's panel host supplied `panel`, `shell`,
@@ -130,7 +131,11 @@ Item {
   // back to this file's own resolved directory.
   readonly property string pluginRoot: pluginApi && pluginApi.pluginDir
     ? String(pluginApi.pluginDir) : ""
-  readonly property string stateDir: (Quickshell.env("XDG_STATE_HOME") || (Quickshell.env("HOME") + "/.local/state")) + "/radio-atlas"
+  // R8: the plugin's own state dir is the only place it may write, and the
+  // helpers read the same variable, so the service and bin/radio-state agree.
+  readonly property string stateDir: pluginApi && pluginApi.stateDir
+    ? String(pluginApi.stateDir)
+    : ((Quickshell.env("XDG_STATE_HOME") || (Quickshell.env("HOME") + "/.local/state")) + "/ryoku/plugins/radio-atlas")
   readonly property var stateEnv: ["RADIO_ATLAS_STATE_DIR=" + stateDir, "RADIO_ATLAS_RUNTIME_DIR=/run/user/" + Quickshell.env("UID")]
   readonly property string binDir: pluginRoot !== "" ? pluginRoot + "/bin" : ""
 
