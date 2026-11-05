@@ -16,6 +16,7 @@ Item {
     property string density: "glyph"
     property real s: 1
     property real widthBudget: 220
+    readonly property bool desktopMode: density === "compact"
 
     readonly property var service: pluginApi ? pluginApi.mainInstance : null
 
@@ -42,11 +43,31 @@ Item {
         return name.length > 26 ? name.slice(0, 26) + "…" : name;
     }
 
-    implicitWidth: row.implicitWidth + 4 * s
-    implicitHeight: Math.max(row.implicitHeight, 18 * s)
+    implicitWidth: root.desktopMode
+        ? (desktopContent.item ? desktopContent.item.implicitWidth : widthBudget)
+        : row.implicitWidth + 4 * s
+    implicitHeight: root.desktopMode
+        ? (desktopContent.item ? desktopContent.item.implicitHeight : 240 * s)
+        : Math.max(row.implicitHeight, 18 * s)
+
+    Loader {
+        id: desktopContent
+        anchors.fill: parent
+        active: root.desktopMode
+        source: "DesktopWidget.qml"
+        onLoaded: {
+            item.pluginApi = Qt.binding(() => root.pluginApi)
+            item.screen = Qt.binding(() => root.screen)
+            item.active = Qt.binding(() => root.active)
+            item.density = Qt.binding(() => root.density)
+            item.s = Qt.binding(() => root.s)
+            item.widthBudget = Qt.binding(() => root.widthBudget)
+        }
+    }
 
     Row {
         id: row
+        visible: !root.desktopMode
         anchors.verticalCenter: parent.verticalCenter
         spacing: 6 * root.s
 
@@ -74,6 +95,7 @@ Item {
 
     MouseArea {
         anchors.fill: parent
+        visible: !root.desktopMode
         cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
         onWheel: function(delta) { root.service && root.service.volumeUp(); }

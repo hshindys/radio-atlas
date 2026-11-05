@@ -2,19 +2,22 @@
   "schemaVersion": 1,
   "id": "radio-atlas",
   "name": "Radio Atlas",
-  "version": "0.1.15",
+  "version": "0.1.17",
   "author": "hshindys <hshindys@users.noreply.github.com>",
   "license": "MIT",
   "official": false,
-  "description": "Explore live radio on a rotatable globe from the bar, and play stations through mpv with an MPRIS bridge. Ported from akshar.radio-atlas (Omarchy bar widget, MIT, by Akshar Patel) to the Ryoku plugin contract.",
+  "description": "Explore live radio from the bar or desktop. Save favorite stations and play them with desktop controls or the Radio Atlas globe panel.",
   "tags": [
     "radio",
     "music",
     "globe",
-    "bar-widget"
+    "bar-widget",
+    "desktop-widget",
+    "favorites"
   ],
   "hosts": [
-    "topbarGlyph"
+    "topbarGlyph",
+    "desktopWidget"
   ],
   "entryPoints": {
     "main": "service/Main.qml",
@@ -25,6 +28,7 @@
     "width": 520
   },
   "files": [
+    "content/DesktopWidget.qml",
     "bin/radio-fetch",
     "bin/radio-player",
     "bin/radio-state",
@@ -57,7 +61,8 @@
   "capabilities": {
     "densities": [
       "glyph",
-      "full"
+      "full",
+      "compact"
     ],
     "network": [
       "all.api.radio-browser.info",
@@ -69,6 +74,9 @@
   "defaults": {
     "host": "topbarGlyph",
     "label": "Radio Atlas",
+    "desktopWidget": {
+      "bg": "card"
+    },
     "stateDir": "$XDG_STATE_HOME/ryoku/plugins/radio-atlas",
     "icon": "radio"
   },

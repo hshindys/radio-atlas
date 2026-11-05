@@ -20,14 +20,6 @@ Item {
     source: "HyprlandBridge.qml"
     onLoaded: root.hyprlandBridge = item
   }
-  Component.onCompleted: {
-    // Only load the Hyprland bridge when running under Hyprland.
-    try { hyprlandLoader.active = (Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE") !== ""); }
-    catch (e) { hyprlandLoader.active = false; }
-    // The state dir itself is created by the helpers (bin/radio-state runs
-    // install -d), so the QML never spawns a process to make it.
-  }
-
   // Ryoku host properties. Omarchy's panel host supplied `panel`, `shell`,
   // `manifest` and a bare shell `Style`; Ryoku supplies pluginApi, density,
   // s, active and widthBudget, and tokens come from Theme.
@@ -1518,6 +1510,8 @@ Item {
   }
 
   Component.onCompleted: {
+    try { hyprlandLoader.active = (Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE") !== ""); }
+    catch (e) { hyprlandLoader.active = false; }
     if (typeof Atlas.Style.rootDensity !== "undefined") Atlas.Style.rootDensity = s
     retryStart()
   }

@@ -1,8 +1,9 @@
 # Radio Atlas (Ryoku port)
 
-Live radio on a rotatable globe from the QS Bar. Click a station signal to play
-it, or click a country to browse its stations. Playback runs in `mpv`, with an
-MPRIS bridge so the desktop media controls work.
+Live radio on a rotatable globe from the QS Bar, with a favorites-and-player
+tile available on the desktop. Click a station signal to play it, or click a
+country to browse its stations. Playback runs in `mpv`, with an MPRIS bridge so
+the desktop media controls work.
 
 Ported from `akshar.radio-atlas` 0.1.9 (Omarchy bar widget, by Akshar Patel) to
 the Ryoku plugin contract. The player, the directory client, the sandbox and the
@@ -13,13 +14,20 @@ the plugin/host API surface.
 
 - **Widget** (`content/Widget.qml`): a globe glyph with the playing station or
   the volume. Left click opens the globe, middle click tunes a random station,
-  right click stops or resumes, the wheel changes volume.
+  right click stops or resumes, the wheel changes volume. The desktop host
+  renders `content/DesktopWidget.qml`: saved favorites, one-click playback,
+  transport controls, volume and mute.
 - **Panel** (`content/Panel.qml`): the globe — drag to spin, wheel to zoom,
   click a signal to play, click a country to browse. Below it: search, the
-  station list, favourites and recent, the player (play/pause/stop/next/previous,
-  volume, mute), and an audio-output picker.
+  station list, Favorites and Recent tabs, star buttons, the player
+  (play/pause/stop/next/previous, volume, mute), and an audio-output picker.
 - **Service** (`service/Main.qml`): the saved state (favourites, history,
   volume, audio output) and the station directory.
+
+The plugin supports both the bar and desktop hosts, but Ryoku selects one host
+per plugin placement. Switching Radio Atlas to the desktop host removes its bar
+placement; this change adds support without switching the currently working bar
+placement.
 
 ## What it runs, reads, writes
 
