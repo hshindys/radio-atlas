@@ -193,7 +193,6 @@ Item {
         id: card
         s: root.s
         width: root.implicitWidth
-        implicitHeight: body.implicitHeight + 26 * root.s
 
         Column {
             id: layout
@@ -237,7 +236,7 @@ Item {
                         text: root.statusText
                         color: Theme.dim
                         font.family: Theme.font
-                        font.pixelSize: 10 * root.s
+                        font.pixelSize: 11 * root.s
                         elide: Text.ElideRight
                     }
                 }
@@ -248,7 +247,7 @@ Item {
                     text: root.favorites.length + " saved"
                     color: Theme.dim
                     font.family: Theme.font
-                    font.pixelSize: 10 * root.s
+                    font.pixelSize: 11 * root.s
                 }
             }
 
@@ -299,7 +298,7 @@ Item {
                                 ? root.currentStationCountry : root.outputLabel(root.outputId)
                             color: Theme.dim
                             font.family: Theme.font
-                            font.pixelSize: 10 * root.s
+                            font.pixelSize: 11 * root.s
                             elide: Text.ElideRight
                         }
                     }
@@ -321,7 +320,7 @@ Item {
                     delegate: Rectangle {
                         required property var modelData
                         width: (parent.width - 18 * root.s) / 4
-                        height: 28 * root.s
+                        height: 30 * root.s
                         radius: 6 * root.s
                         color: mouseArea.containsMouse ? Theme.tileBg : "transparent"
                         border.width: 1
@@ -332,7 +331,7 @@ Item {
                             text: modelData.label
                             color: Theme.bright
                             font.family: Theme.font
-                            font.pixelSize: 10 * root.s
+                            font.pixelSize: 11 * root.s
                         }
                         MouseArea {
                             id: mouseArea
@@ -363,7 +362,7 @@ Item {
                         text: root.volumeValue === 0 ? "Mute" : "Vol"
                         color: Theme.bright
                         font.family: Theme.font
-                        font.pixelSize: 9 * root.s
+                        font.pixelSize: 11 * root.s
                     }
                     MouseArea {
                         id: muteArea
@@ -412,7 +411,7 @@ Item {
                     text: root.volumeValue + "%"
                     color: Theme.dim
                     font.family: Theme.font
-                    font.pixelSize: 10 * root.s
+                    font.pixelSize: 11 * root.s
                 }
             }
 
@@ -440,7 +439,7 @@ Item {
                             text: modelData.label
                             color: root.tab === modelData.key ? Theme.bright : Theme.dim
                             font.family: Theme.font
-                            font.pixelSize: 10 * root.s
+                            font.pixelSize: 11 * root.s
                             font.weight: root.tab === modelData.key ? Font.DemiBold : Font.Normal
                         }
                         MouseArea {
@@ -511,7 +510,7 @@ Item {
                                     text: root.stationDetail(modelData)
                                     color: Theme.dim
                                     font.family: Theme.font
-                                    font.pixelSize: 9 * root.s
+                                    font.pixelSize: 11 * root.s
                                     elide: Text.ElideRight
                                 }
                             }
@@ -532,7 +531,7 @@ Item {
                                 text: "Play"
                                 color: Theme.bright
                                 font.family: Theme.font
-                                font.pixelSize: 9 * root.s
+                                font.pixelSize: 11 * root.s
                             }
                             MouseArea {
                                 anchors.fill: parent
@@ -581,7 +580,7 @@ Item {
                         : "No favorites yet. Star a station in the Radio Atlas panel.")
                 color: Theme.dim
                 font.family: Theme.font
-                font.pixelSize: 10 * root.s
+                font.pixelSize: 11 * root.s
             }
 
             // --- audio output --------------------------------------------
@@ -608,7 +607,7 @@ Item {
                             text: modelData.label !== undefined ? modelData.label : String(modelData.id)
                             color: root.outputId === modelData.id ? Theme.bright : Theme.dim
                             font.family: Theme.font
-                            font.pixelSize: 8 * root.s
+                            font.pixelSize: 11 * root.s
                             elide: Text.ElideRight
                         }
                         MouseArea {
@@ -629,7 +628,7 @@ Item {
                 text: root.errorText
                 color: Theme.verm
                 font.family: Theme.font
-                font.pixelSize: 10 * root.s
+                font.pixelSize: 11 * root.s
             }
         }
     }
