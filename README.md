@@ -14,9 +14,13 @@ the plugin/host API surface.
 
 - **Widget** (`content/Widget.qml`): a globe glyph with the playing station or
   the volume. Left click opens the globe, middle click tunes a random station,
-  right click stops or resumes, the wheel changes volume. The desktop host
-  renders `content/DesktopWidget.qml`: saved favorites, one-click playback,
-  transport controls, volume and mute.
+  right click stops or resumes, the wheel changes volume.
+- **Desktop widget** (`content/DesktopWidget.qml`): the complete desktop surface
+  — now-playing with its country and live status, transport (prev / play-pause /
+  next / stop), a clickable volume bar with a percentage readout and a mute
+  toggle, Favorites / Recent / Search tabs, one-click playback and star toggle
+  per row, live station search, and the audio-output picker. It is theme-aware
+  through `Ryoku.PluginKit` (`Card`, `Theme`) so it follows the active scheme.
 - **Panel** (`content/Panel.qml`): the globe — drag to spin, wheel to zoom,
   click a signal to play, click a country to browse. Below it: search, the
   station list, Favorites and Recent tabs, star buttons, the player

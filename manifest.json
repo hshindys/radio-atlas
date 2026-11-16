@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "radio-atlas",
   "name": "Radio Atlas",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "author": "hshindys <hshindys@users.noreply.github.com>",
   "license": "MIT",
   "official": false,
@@ -29,6 +29,7 @@
   },
   "files": [
     "content/DesktopWidget.qml",
+    "content/HyprlandBridge.qml",
     "bin/radio-fetch",
     "bin/radio-player",
     "bin/radio-state",
