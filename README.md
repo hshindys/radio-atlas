@@ -28,10 +28,18 @@ the plugin/host API surface.
 - **Service** (`service/Main.qml`): the saved state (favourites, history,
   volume, audio output) and the station directory.
 
-The plugin supports both the bar and desktop hosts, but Ryoku selects one host
-per plugin placement. Switching Radio Atlas to the desktop host removes its bar
-placement; this change adds support without switching the currently working bar
-placement.
+The plugin supports both the bar and desktop hosts, but Ryoku keeps one host per
+plugin placement: the bar shows the glyph, the wallpaper shows the full desktop
+surface. Switch with
+
+```
+ryoku-plugins-place radio-atlas host desktopWidget      # wallpaper tile
+ryoku-plugins-place radio-atlas host topbarGlyph        # bar glyph
+ryoku-plugins-place radio-atlas desktopWidget <x> <y> [scale] [locked]
+```
+
+The desktop surface is `content/DesktopWidget.qml`, reached through the Loader in
+`content/Widget.qml` when the host reports the `compact` density.
 
 ## What it runs, reads, writes
 
